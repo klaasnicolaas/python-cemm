@@ -10,11 +10,11 @@ async def main():
     """Test."""
     async with CEMM(
         host="example.com",
-    ) as cemm:
-        device: Device = await cemm.device()
-        smartmeter: SmartMeter = await cemm.smartmeter("p1")
-        water: Water = await cemm.water("pulse-1")
-        solarpanel: SolarPanel = await cemm.solarpanel("mb3")
+    ) as client:
+        device: Device = await client.device()
+        smartmeter: SmartMeter = await client.smartmeter("p1")
+        water: Water = await client.water("pulse-1")
+        solarpanel: SolarPanel = await client.solarpanel("mb3")
         print("-- DEVICE --")
         print(device)
         print(f"Model: {device.model}")

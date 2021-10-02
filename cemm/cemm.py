@@ -32,7 +32,7 @@ class CEMM:
             session: Optional, shared, aiohttp client session.
         """
         self._session = session
-        self._close_session = False
+        self._close_session: bool = False
 
         self.host = host
         self.request_timout = request_timeout
@@ -102,7 +102,7 @@ class CEMM:
         Returns:
             A Device data object from the CEMM device API.
         """
-        data = await self.request("v1/")
+        data = await self.request("v1")
         return Device.from_dict(data)
 
     async def smartmeter(self, alias) -> SmartMeter:
