@@ -22,6 +22,72 @@ Asynchronous Python client for the CEMM devices.
 
 ## About
 
+A python package with which you can read the data from your [CEMM][cemm] device via a local API. You can use it to read your smart meter via the P1, read your water meter and gain insight into how much your solar panels are producing.
+
+## Installation
+
+```bash
+pip install cemm
+```
+
+## Usage
+
+```py
+import asyncio
+
+from cemm import CEMM
+
+
+async def main():
+    """Show example on getting data from your CEMM device."""
+    async with CEMM(
+        host="example_host",
+    ) as client:
+        device = await client.device()
+        smartmeter = await client.smartpanel("p1")
+        water = await client.water("pulse-1")
+        solarpanel = await client.solarpanel("mb3")
+        print(device)
+        print(smartmeter)
+        print(water)
+        print(solarpanel)
+
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
+```
+
+## Data
+
+You can read the following data with this package, the `power flow` entities can also give a negative value.
+
+### Device
+
+- Model
+- Version
+
+### SmartMeter
+
+- Power Flow (W)
+- Gas Consumption (m3)
+- Energy Tariff Period
+- Energy Consumption - High / Low (kWh)
+- Energy Returned - High / Low (kWh)
+- Billed Energy - High / Low (kWh)
+
+### Water
+
+- Flow (liters)
+- Volume
+
+### Solarpanel
+
+- Power Flow (W)
+- Device Consumption - High / Low / Total (kWh)
+- Gross Production - High / Low / Total (kWh)
+- Net Production - High / Low / Total (kWh)
+
 ## Setting up development environment
 
 This Python project is fully managed using the [Poetry][poetry] dependency
@@ -91,6 +157,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+[cemm]: https://cemm.nl
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [build-shield]: https://github.com/klaasnicolaas/python-cemm/actions/workflows/tests.yaml/badge.svg
