@@ -3,7 +3,7 @@
 
 import asyncio
 
-from cemm import CEMM, Device, SmartMeter, SolarPanel, Water
+from cemm import CEMM, Connection, Device, SmartMeter, SolarPanel, Water
 
 
 async def main():
@@ -11,15 +11,23 @@ async def main():
     async with CEMM(
         host="example.com",
     ) as client:
+        connections: Connection = await client.all_connections()
         device: Device = await client.device()
         smartmeter: SmartMeter = await client.smartmeter("p1")
         water: Water = await client.water("pulse-1")
         solarpanel: SolarPanel = await client.solarpanel("mb3")
+
+        print("-- CONNECTIONS --")
+        for item in connections:
+            print(item)
+        print()
+
         print("-- DEVICE --")
         print(device)
         print(f"Model: {device.model}")
         print(f"Version: {device.version}")
         print()
+
         print("-- SMART METER --")
         print(smartmeter)
         print(f"Power Flow: {smartmeter.power_flow}")
@@ -32,11 +40,13 @@ async def main():
         print(f"Billed Energy - High: {smartmeter.billed_energy_high}")
         print(f"Billed Energy - Low: {smartmeter.billed_energy_low}")
         print()
+
         print("-- WATER --")
         print(water)
         print(f"Flow: {water.flow}")
         print(f"Volume: {water.volume}")
         print()
+
         print("-- SOLAR PANELS --")
         print(solarpanel)
         print(f"Power Flow: {solarpanel.power_flow}")

@@ -6,6 +6,32 @@ from typing import Any
 
 
 @dataclass
+class Connection:
+    """Object representing an Connection response from CEMM."""
+
+    io_id: int
+    io_type: str
+    alias: str
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Connection:
+        """Return Connection object from the CEMM response.
+
+        Args:
+            data: The JSON data from the CEMM device.
+
+        Returns:
+            An Connection object.
+        """
+
+        return cls(
+            io_id=data.get("io_id"),
+            io_type=data.get("type"),
+            alias=data.get("alias"),
+        )
+
+
+@dataclass
 class Device:
     """Object representing an Device response from CEMM."""
 
