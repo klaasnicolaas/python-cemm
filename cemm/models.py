@@ -35,8 +35,10 @@ class Connection:
 class Device:
     """Object representing an Device response from CEMM."""
 
-    model: str | None
-    version: str | None
+    model: str
+    mac: str
+    version: str
+    core: str
 
     @staticmethod
     def from_dict(data: dict[str, Any]) -> Device:
@@ -49,8 +51,10 @@ class Device:
             An Device object.
         """
         return Device(
-            model=data.get("data")["name"],
-            version=data.get("data")["version"],
+            model=data.get("name"),
+            mac=data.get("mac"),
+            version=data.get("version"),
+            core=data.get("core"),
         )
 
 

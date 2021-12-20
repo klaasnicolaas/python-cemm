@@ -73,7 +73,9 @@ You can read the following data with this package, the `power flow` entities can
 ### Device
 
 - Model
+- Mac address
 - Version
+- Core version
 
 ### SmartMeter
 

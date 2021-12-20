@@ -110,6 +110,7 @@ class CEMM:
             A Device data object from the CEMM device API.
         """
         data = await self.request("v1")
+        data = data["data"]
         return Device.from_dict(data)
 
     async def smartmeter(self, alias) -> SmartMeter:
