@@ -2,12 +2,15 @@
 from __future__ import annotations
 
 import asyncio
+import socket
 from collections.abc import Mapping
 from dataclasses import dataclass
+from importlib import metadata
 from typing import Any
 
 import async_timeout
 from aiohttp.client import ClientError, ClientResponseError, ClientSession
+from aiohttp.hdrs import METH_GET
 from yarl import URL
 
 from .exceptions import CEMMConnectionError, CEMMError
@@ -18,35 +21,24 @@ from .models import Connection, Device, SmartMeter, SolarPanel, Water
 class CEMM:
     """Main class for handling connection with the CEMM device."""
 
-    def __init__(
-        self,
-        host: str,
-        request_timeout: int = 10,
-        session: ClientSession | None = None,
-    ) -> None:
-        """Initialize connection with the CEMM device.
+    host: str
+    request_timeout: int = 10
+    session: ClientSession | None = None
 
-        Args:
-            host: IP address of the CEMM device.
-            request_timeout: An integer with the request timeout in seconds.
-            session: Optional, shared, aiohttp client session.
-        """
-        self._session = session
-        self._close_session: bool = False
-
-        self.host = host
-        self.request_timout = request_timeout
+    _close_session: bool = False
 
     async def request(
         self,
         uri: str,
         *,
+        method: str = METH_GET,
         params: Mapping[str, str] | None = None,
     ) -> dict[str, Any]:
         """Handle a request to a CEMM device.
 
         Args:
             uri: Request URI, without '/', for example, 'status'
+            method: HTTP Method to use.
             params: Extra options to improve or limit the response.
 
         Returns:
@@ -58,20 +50,22 @@ class CEMM:
                 with the CEMM device.
             CEMMError: Received an unexpected response from the CEMM device.
         """
+        version = metadata.version(__package__)
         url = URL.build(scheme="http", host=self.host, path="/open-api/").join(URL(uri))
 
         headers = {
+            "User-Agent": f"PythonCEMM/{version}",
             "Accept": "application/json, text/plain, */*",
         }
 
-        if self._session is None:
-            self._session = ClientSession()
+        if self.session is None:
+            self.session = ClientSession()
             self._close_session = True
 
         try:
-            with async_timeout.timeout(self.request_timout):
-                response = await self._session.request(
-                    "GET",
+            async with async_timeout.timeout(self.request_timeout):
+                response = await self.session.request(
+                    method,
                     url,
                     params=params,
                     headers=headers,
@@ -81,7 +75,7 @@ class CEMM:
             raise CEMMConnectionError(
                 "Timeout occurred while connecting to CEMM device"
             ) from exception
-        except (ClientError, ClientResponseError) as exception:
+        except (ClientError, ClientResponseError, socket.gaierror) as exception:
             raise CEMMConnectionError(
                 "Error occurred while communicating with the CEMM device"
             ) from exception
@@ -158,8 +152,8 @@ class CEMM:
 
     async def close(self) -> None:
         """Close open client session."""
-        if self._session and self._close_session:
-            await self._session.close()
+        if self.session and self._close_session:
+            await self.session.close()
 
     async def __aenter__(self) -> CEMM:
         """Async enter.

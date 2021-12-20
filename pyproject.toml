@@ -63,7 +63,7 @@ bandit = "^1.7.1"
 Changelog = "https://github.com/klaasnicolaas/python-cemm/releases"
 
 [tool.black]
-target-version = ['py37']
+target-version = ['py38']
 
 [tool.coverage.paths]
 source = ["cemm"]
@@ -120,5 +120,5 @@ paths = ["cemm"]
 verbose = true
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["setuptools","poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
