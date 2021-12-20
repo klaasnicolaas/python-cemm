@@ -11,7 +11,7 @@ from aiohttp.client import ClientError, ClientResponseError, ClientSession
 from yarl import URL
 
 from .exceptions import CEMMConnectionError, CEMMError
-from .models import Device, SmartMeter, SolarPanel, Water
+from .models import Connection, Device, SmartMeter, SolarPanel, Water
 
 
 @dataclass
@@ -95,6 +95,19 @@ class CEMM:
             )
 
         return await response.json()
+
+    async def all_connections(self) -> Connection:
+        """Get a list of all used aliases.
+
+        Returns:
+            A list of Connection objects.
+        """
+        results = []
+
+        data = await self.request("v1/io")
+        for item in data["data"]:
+            results.append(Connection.from_dict(item))
+        return results
 
     async def device(self) -> Device:
         """Get the latest values from the CEMM device.
