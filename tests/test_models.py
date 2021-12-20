@@ -2,9 +2,34 @@
 import aiohttp
 import pytest
 
-from cemm import CEMM, Device, SmartMeter, SolarPanel, Water
+from cemm import CEMM, Connection, Device, SmartMeter, SolarPanel, Water
 
 from . import ALIAS_SMARTMETER, ALIAS_SOLAR, ALIAS_WATER, load_fixtures
+
+
+@pytest.mark.asyncio
+async def test_connections(aresponses):
+    """Test request from a CEMM device - Connection object."""
+    aresponses.add(
+        "example.com",
+        "/open-api/v1/io",
+        "GET",
+        aresponses.Response(
+            text=load_fixtures("connections.json"),
+            status=200,
+            headers={"Content-Type": "application/json; charset=utf-8"},
+        ),
+    )
+
+    async with aiohttp.ClientSession() as session:
+        client = CEMM(host="example.com", session=session)
+        connections: Connection = await client.all_connections()
+        assert connections
+        for item in connections:
+            assert isinstance(item, Connection)
+            assert item.io_id
+            assert item.io_type
+            assert item.alias
 
 
 @pytest.mark.asyncio
