@@ -52,6 +52,7 @@ async def test_device(aresponses):
         assert device
         assert device.model == "CEMM Plus"
         assert device.version == "2.26.0.0"
+        assert device.core == "1.25"
 
 
 @pytest.mark.asyncio

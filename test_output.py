@@ -25,7 +25,9 @@ async def main():
         print("-- DEVICE --")
         print(device)
         print(f"Model: {device.model}")
+        print(f"MAC: {device.mac}")
         print(f"Version: {device.version}")
+        print(f"Core: {device.core}")
         print()
 
         print("-- SMART METER --")
