@@ -43,10 +43,12 @@ async def main():
     async with CEMM(
         host="example_host",
     ) as client:
+        connections = await client.all_connections()
         device = await client.device()
         smartmeter = await client.smartpanel("p1")
         water = await client.water("pulse-1")
         solarpanel = await client.solarpanel("mb3")
+        print(connections)
         print(device)
         print(smartmeter)
         print(water)
@@ -61,6 +63,12 @@ if __name__ == "__main__":
 ## Data
 
 You can read the following data with this package, the `power flow` entities can also give a negative value.
+
+### Connections
+
+- ID
+- Type
+- Alias
 
 ### Device
 
