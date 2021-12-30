@@ -176,8 +176,8 @@ SOFTWARE.
 [code-quality-shield]: https://img.shields.io/lgtm/grade/python/g/klaasnicolaas/python-cemm.svg?logo=lgtm&logoWidth=18
 [code-quality]: https://lgtm.com/projects/g/klaasnicolaas/python-cemm/context:python
 [commits-shield]: https://img.shields.io/github/commit-activity/y/klaasnicolaas/python-cemm.svg
-[commits-url]: https://github.com/klaasnicolaas/python-cemm/commits/master
-[codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-cemm/branch/master/graph/badge.svg?token=VQTR24YFQ9
+[commits-url]: https://github.com/klaasnicolaas/python-cemm/commits/main
+[codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-cemm/branch/main/graph/badge.svg?token=VQTR24YFQ9
 [codecov-url]: https://codecov.io/gh/klaasnicolaas/python-cemm
 [forks-shield]: https://img.shields.io/github/forks/klaasnicolaas/python-cemm.svg
 [forks-url]: https://github.com/klaasnicolaas/python-cemm/network/members
