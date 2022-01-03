@@ -46,7 +46,7 @@ async def main():
         connections = await client.all_connections()
         device = await client.device()
         smartmeter = await client.smartpanel("p1")
-        water = await client.water("pulse-1")
+        watermeter = await client.watermeter("pulse-1")
         solarpanel = await client.solarpanel("mb3")
         print(connections)
         print(device)
@@ -86,7 +86,7 @@ You can read the following data with this package, the `power flow` entities can
 - Energy Returned - High / Low (kWh)
 - Billed Energy - High / Low (kWh)
 
-### Water
+### WaterMeter
 
 - Flow (liters)
 - Volume
