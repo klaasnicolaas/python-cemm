@@ -121,14 +121,14 @@ class SolarPanel:
 
 
 @dataclass
-class Water:
-    """Object representing an Water response from CEMM."""
+class WaterMeter:
+    """Object representing an WaterMeter response from CEMM."""
 
     flow: float
     volume: float
 
     @staticmethod
-    def from_dict(data: dict[str, Any]) -> Water:
+    def from_dict(data: dict[str, Any]) -> WaterMeter:
         """Return Water object from the CEMM response.
 
         Args:
@@ -137,7 +137,7 @@ class Water:
         Returns:
             An Water object.
         """
-        return Water(
+        return WaterMeter(
             flow=data.get("data")["flow"][1], volume=data.get("totals")["volume"][1]
         )
 

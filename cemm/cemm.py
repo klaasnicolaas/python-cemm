@@ -14,7 +14,7 @@ from aiohttp.hdrs import METH_GET
 from yarl import URL
 
 from .exceptions import CEMMConnectionError, CEMMError
-from .models import Connection, Device, SmartMeter, SolarPanel, Water
+from .models import Connection, Device, SmartMeter, SolarPanel, WaterMeter
 
 
 @dataclass
@@ -22,7 +22,7 @@ class CEMM:
     """Main class for handling connection with the CEMM device."""
 
     host: str
-    request_timeout: int = 10
+    request_timeout: float = 10.0
     session: ClientSession | None = None
 
     _close_session: bool = False
@@ -125,7 +125,7 @@ class CEMM:
         data = await self.request(f"v1/{alias}/realtime")
         return SmartMeter.from_dict(data)
 
-    async def water(self, alias) -> Water:
+    async def watermeter(self, alias) -> WaterMeter:
         """Get the latest values from the CEMM device.
 
         Args:
@@ -133,10 +133,10 @@ class CEMM:
                 read data (pulse-1, pulse-2, pulse-3).
 
         Returns:
-            A Water data object from the CEMM device API.
+            A WaterMeter data object from the CEMM device API.
         """
         data = await self.request(f"v1/{alias}/realtime")
-        return Water.from_dict(data)
+        return WaterMeter.from_dict(data)
 
     async def solarpanel(self, alias) -> SolarPanel:
         """Get the latest values from the CEMM device.
