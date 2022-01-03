@@ -46,12 +46,12 @@ async def main():
         connections = await client.all_connections()
         device = await client.device()
         smartmeter = await client.smartpanel("p1")
-        water = await client.water("pulse-1")
+        watermeter = await client.watermeter("pulse-1")
         solarpanel = await client.solarpanel("mb3")
         print(connections)
         print(device)
         print(smartmeter)
-        print(water)
+        print(watermeter)
         print(solarpanel)
 
 
@@ -86,7 +86,7 @@ You can read the following data with this package, the `power flow` entities can
 - Energy Returned - High / Low (kWh)
 - Billed Energy - High / Low (kWh)
 
-### Water
+### WaterMeter
 
 - Flow (liters)
 - Volume
@@ -158,7 +158,7 @@ poetry run pytest
 
 MIT License
 
-Copyright (c) 2021 Klaas Schoute
+Copyright (c) 2022 Klaas Schoute
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -195,7 +195,7 @@ SOFTWARE.
 [issues-url]: https://github.com/klaasnicolaas/python-cemm/issues
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-cemm.svg
 [last-commit-shield]: https://img.shields.io/github/last-commit/klaasnicolaas/python-cemm.svg
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2021.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
 [maintainability-shield]: https://api.codeclimate.com/v1/badges/82ca5d035a7ef3520b52/maintainability
 [maintainability-url]: https://codeclimate.com/github/klaasnicolaas/python-cemm/maintainability
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg

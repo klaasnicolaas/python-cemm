@@ -2,8 +2,8 @@
 import os
 
 ALIAS_SMARTMETER = "p1"
-ALIAS_WATER = "pulse-1"
-ALIAS_SOLAR = "mb-5"
+ALIAS_WATERMETER = "pulse-1"
+ALIAS_SOLARPANEL = "mb-5"
 
 
 def load_fixtures(filename):
