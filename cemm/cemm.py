@@ -90,13 +90,13 @@ class CEMM:
 
         return await response.json()
 
-    async def all_connections(self) -> Connection:
+    async def all_connections(self) -> list[Connection]:
         """Get a list of all used aliases.
 
         Returns:
             A list of Connection objects.
         """
-        results = []
+        results: list[Connection] = []
 
         data = await self.request("v1/io")
         for item in data["data"]:

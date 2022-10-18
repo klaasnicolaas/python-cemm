@@ -25,9 +25,9 @@ class Connection:
         """
 
         return cls(
-            io_id=data.get("io_id"),
-            io_type=data.get("type"),
-            alias=data.get("alias"),
+            io_id=data["io_id"],
+            io_type=data["type"],
+            alias=data["alias"],
         )
 
 
@@ -51,10 +51,10 @@ class Device:
             An Device object.
         """
         return Device(
-            model=data.get("name"),
-            mac=data.get("mac"),
-            version=data.get("version"),
-            core=data.get("core"),
+            model=data["name"],
+            mac=data["mac"],
+            version=data["version"],
+            core=data["core"],
         )
 
 
@@ -95,28 +95,28 @@ class SolarPanel:
             An SolarPanel object.
         """
 
-        def sum_values(value1, value2):
+        def sum_values(value1, value2) -> float:
             total = round(float(value1 + value2), 2)
             return total
 
         return SolarPanel(
-            power_flow=data.get("data")["electric_power"][1],
+            power_flow=data["data"]["electric_power"][1],
             device_consumption_total=sum_values(
-                data.get("totals")["t3"][1], data.get("totals")["t4"][1]
+                data["totals"]["t3"][1], data["totals"]["t4"][1]
             ),
-            device_consumption_low=data.get("totals")["t3"][1],
-            device_consumption_high=data.get("totals")["t4"][1],
+            device_consumption_low=data["totals"]["t3"][1],
+            device_consumption_high=data["totals"]["t4"][1],
             gross_production_total=sum_values(
-                data.get("totals")["t1"][1], data.get("totals")["t2"][1]
+                data["totals"]["t1"][1], data["totals"]["t2"][1]
             ),
-            gross_production_low=data.get("totals")["t1"][1],
-            gross_production_high=data.get("totals")["t2"][1],
+            gross_production_low=data["totals"]["t1"][1],
+            gross_production_high=data["totals"]["t2"][1],
             net_production_total=sum_values(
-                data.get("totals")["electric_energy"][1],
-                data.get("totals")["electric_energy_high"][1],
+                data["totals"]["electric_energy"][1],
+                data["totals"]["electric_energy_high"][1],
             ),
-            net_production_low=data.get("totals")["electric_energy"][1],
-            net_production_high=data.get("totals")["electric_energy_high"][1],
+            net_production_low=data["totals"]["electric_energy"][1],
+            net_production_high=data["totals"]["electric_energy_high"][1],
         )
 
 
@@ -138,7 +138,7 @@ class WaterMeter:
             An Water object.
         """
         return WaterMeter(
-            flow=data.get("data")["flow"][1], volume=data.get("totals")["volume"][1]
+            flow=data["data"]["flow"][1], volume=data["totals"]["volume"][1]
         )
 
 
@@ -169,13 +169,13 @@ class SmartMeter:
             An SmartMeter object.
         """
         return SmartMeter(
-            power_flow=data.get("data")["electric_power"][1],
-            gas_consumption=data.get("data")["gas"][1],
-            energy_tariff_period=data.get("data")["rate"][1],
-            energy_consumption_low=data.get("data")["t1"][1],
-            energy_consumption_high=data.get("data")["t2"][1],
-            energy_returned_low=data.get("data")["t3"][1],
-            energy_returned_high=data.get("data")["t4"][1],
-            billed_energy_low=data.get("totals")["electric_energy"][1],
-            billed_energy_high=data.get("totals")["electric_energy_high"][1],
+            power_flow=data["data"]["electric_power"][1],
+            gas_consumption=data["data"]["gas"][1],
+            energy_tariff_period=data["data"]["rate"][1],
+            energy_consumption_low=data["data"]["t1"][1],
+            energy_consumption_high=data["data"]["t2"][1],
+            energy_returned_low=data["data"]["t3"][1],
+            energy_returned_high=data["data"]["t4"][1],
+            billed_energy_low=data["totals"]["electric_energy"][1],
+            billed_energy_high=data["totals"]["electric_energy_high"][1],
         )
