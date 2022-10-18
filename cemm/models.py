@@ -95,7 +95,7 @@ class SolarPanel:
             An SolarPanel object.
         """
 
-        def sum_values(value1, value2) -> float:
+        def sum_values(value1: float, value2: float) -> float:
             total = round(float(value1 + value2), 2)
             return total
 

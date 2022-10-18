@@ -33,7 +33,7 @@ class CEMM:
         *,
         method: str = METH_GET,
         params: Mapping[str, str] | None = None,
-    ) -> dict[str, Any]:
+    ) -> Any:
         """Handle a request to a CEMM device.
 
         Args:
@@ -113,7 +113,7 @@ class CEMM:
         data = data["data"]
         return Device.from_dict(data)
 
-    async def smartmeter(self, alias) -> SmartMeter:
+    async def smartmeter(self, alias: str) -> SmartMeter:
         """Get the latest values from the CEMM device.
 
         Args:
@@ -125,7 +125,7 @@ class CEMM:
         data = await self.request(f"v1/{alias}/realtime")
         return SmartMeter.from_dict(data)
 
-    async def watermeter(self, alias) -> WaterMeter:
+    async def watermeter(self, alias: str) -> WaterMeter:
         """Get the latest values from the CEMM device.
 
         Args:
@@ -138,7 +138,7 @@ class CEMM:
         data = await self.request(f"v1/{alias}/realtime")
         return WaterMeter.from_dict(data)
 
-    async def solarpanel(self, alias) -> SolarPanel:
+    async def solarpanel(self, alias: str) -> SolarPanel:
         """Get the latest values from the CEMM device.
 
         Args:
@@ -164,7 +164,7 @@ class CEMM:
         """
         return self
 
-    async def __aexit__(self, *_exc_info) -> None:
+    async def __aexit__(self, *_exc_info: Any) -> None:
         """Async exit.
 
         Args:
