@@ -1,6 +1,7 @@
 """Test the models."""
 import aiohttp
 import pytest
+from aresponses import ResponsesMockServer
 
 from cemm import CEMM, Connection, Device, SmartMeter, SolarPanel, WaterMeter
 
@@ -8,7 +9,7 @@ from . import ALIAS_SMARTMETER, ALIAS_SOLARPANEL, ALIAS_WATERMETER, load_fixture
 
 
 @pytest.mark.asyncio
-async def test_connections(aresponses):
+async def test_connections(aresponses: ResponsesMockServer) -> None:
     """Test request from a CEMM device - Connection object."""
     aresponses.add(
         "example.com",
@@ -23,7 +24,7 @@ async def test_connections(aresponses):
 
     async with aiohttp.ClientSession() as session:
         client = CEMM(host="example.com", session=session)
-        connections: Connection = await client.all_connections()
+        connections: list[Connection] = await client.all_connections()
         assert connections is not None
         for item in connections:
             assert isinstance(item, Connection)
@@ -33,7 +34,7 @@ async def test_connections(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_device(aresponses):
+async def test_device(aresponses: ResponsesMockServer) -> None:
     """Test request from a CEMM device - Device object."""
     aresponses.add(
         "example.com",
@@ -56,7 +57,7 @@ async def test_device(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_smartmeter(aresponses):
+async def test_smartmeter(aresponses: ResponsesMockServer) -> None:
     """Test request from a CEMM device - SmartMeter object."""
     aresponses.add(
         "example.com",
@@ -81,7 +82,7 @@ async def test_smartmeter(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_watermeter(aresponses):
+async def test_watermeter(aresponses: ResponsesMockServer) -> None:
     """Test request from a CEMM device - WaterMeter object."""
     aresponses.add(
         "example.com",
@@ -103,7 +104,7 @@ async def test_watermeter(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_solarpanel(aresponses):
+async def test_solarpanel(aresponses: ResponsesMockServer) -> None:
     """Test request from a CEMM device - SolarPanel object."""
     aresponses.add(
         "example.com",

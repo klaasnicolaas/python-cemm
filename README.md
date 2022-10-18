@@ -8,15 +8,17 @@
 [![License][license-shield]](LICENSE)
 
 [![GitHub Activity][commits-shield]][commits-url]
-[![Forks][forks-shield]][forks-url]
+[![PyPi Downloads][downloads-shield]][downloads-url]
+[![GitHub Last Commit][last-commit-shield]][commits-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![GitHub Last Commit][last-commit-shield]][commits-url]
 
 [![Code Quality][code-quality-shield]][code-quality]
 [![Maintainability][maintainability-shield]][maintainability-url]
 [![Code Coverage][codecov-shield]][codecov-url]
+
 [![Build Status][build-shield]][build-url]
+[![Typing Status][typing-shield]][typing-url]
 
 Asynchronous Python client for the CEMM devices.
 
@@ -38,10 +40,10 @@ import asyncio
 from cemm import CEMM
 
 
-async def main():
+async def main() -> None:
     """Show example on getting data from your CEMM device."""
     async with CEMM(
-        host="example_host",
+        host="127.0.0.1",
     ) as client:
         connections = await client.all_connections()
         device = await client.device()
@@ -56,8 +58,7 @@ async def main():
 
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+    asyncio.run(main())
 ```
 
 ## Data
@@ -189,8 +190,8 @@ SOFTWARE.
 [commits-url]: https://github.com/klaasnicolaas/python-cemm/commits/main
 [codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-cemm/branch/main/graph/badge.svg?token=VQTR24YFQ9
 [codecov-url]: https://codecov.io/gh/klaasnicolaas/python-cemm
-[forks-shield]: https://img.shields.io/github/forks/klaasnicolaas/python-cemm.svg
-[forks-url]: https://github.com/klaasnicolaas/python-cemm/network/members
+[downloads-shield]: https://img.shields.io/pypi/dm/cemm
+[downloads-url]: https://pypistats.org/packages/cemm
 [issues-shield]: https://img.shields.io/github/issues/klaasnicolaas/python-cemm.svg
 [issues-url]: https://github.com/klaasnicolaas/python-cemm/issues
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-cemm.svg
@@ -201,12 +202,13 @@ SOFTWARE.
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 [pypi]: https://pypi.org/project/cemm/
 [python-versions-shield]: https://img.shields.io/pypi/pyversions/cemm
+[typing-shield]: https://github.com/klaasnicolaas/python-cemm/actions/workflows/typing.yaml/badge.svg
+[typing-url]: https://github.com/klaasnicolaas/python-cemm/actions/workflows/typing.yaml
 [releases-shield]: https://img.shields.io/github/release/klaasnicolaas/python-cemm.svg
 [releases]: https://github.com/klaasnicolaas/python-cemm/releases
 [stars-shield]: https://img.shields.io/github/stars/klaasnicolaas/python-cemm.svg
 [stars-url]: https://github.com/klaasnicolaas/python-cemm/stargazers
 
-[energiewacht]: https://www.energiewacht.com/hoofdsite/home/nieuws/omnik-failliet/
 [poetry-install]: https://python-poetry.org/docs/#installation
 [poetry]: https://python-poetry.org
 [pre-commit]: https://pre-commit.com
