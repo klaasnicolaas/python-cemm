@@ -1,4 +1,5 @@
-## Python - CEMM Client
+<!-- Banner -->
+![alt Banner of the CEMM package](https://raw.githubusercontent.com/klaasnicolaas/python-cemm/main/assets/header_cemm-min.png)
 
 <!-- PROJECT SHIELDS -->
 [![GitHub Release][releases-shield]][releases]
