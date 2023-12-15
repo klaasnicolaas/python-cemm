@@ -53,7 +53,7 @@ jobs:
       - name: 🚀 Run pytest
         run: poetry run pytest --cov omnikinverter tests
       - name: ⬆️ Upload coverage artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.python }}-${{ matrix.os }}
           path: .coverage
